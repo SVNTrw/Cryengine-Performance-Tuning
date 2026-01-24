@@ -83,7 +83,7 @@ Currently, changing any ingame settings will undo these lines, however they will
 - Overall gameplay feels smoother and more stable 
 
 
-## 🛠 Extra Optimization Step (Not Neccecary, but applies to all games/programs & is quick to to!)
+## 🛠 Extra Optimization Step (Not Neccecary, but applies to all games/programs & is quick to apply!)
 
    **Edit NVIDIA Shader Cache Size**  
    - Open **NVIDIA Control Panel → Manage 3D Settings → Shader Cache**  
