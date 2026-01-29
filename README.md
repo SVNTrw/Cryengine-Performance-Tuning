@@ -49,9 +49,8 @@ This repository consolidates my work into a simple CFG edit for end users.
 4. **Make a space under the already existing lines, then Copy & Paste the following lines under that**  
    - Replace or add the lines exactly as provided below. *(Click the cool box to copy the entire list!)*
 
-   
-   
-***Note on Customization: The numbers surrounded by stars below are optimized for a standard gaming PC (8-core CPU, 8GB GPU, 16GB RAM). While this is "Plug & Play" for most people, you can change the highlighted numbers to match your specific hardware for even better results.***
+
+
 
 ```ini
 ;====================================================================
@@ -62,14 +61,14 @@ This repository consolidates my work into a simple CFG edit for end users.
 
 ;--- System & CPU Optimization ---
 sys_job_system_enable = 1            ; Helps the engine share the workload across your processor
-sys_job_system_max_worker = **4** ; Set this to your physical core count so the engine uses the whole CPU
+sys_job_system_max_worker = 4 ; Set this to your physical core count so the engine uses the whole CPU
 r_UseShaderThread = 1                ; Keeps shader loading on its own track to prevent hitching
 r_MultiThreaded = 1                  ; Tells the engine to use all available cores
 
 ;--- Memory & Asset Streaming ---
-sys_budget_videomem = **4096** ; Total amount of VRAM your graphics card has in MB
-sys_streaming_memory_size = **1024** ; How much room the engine has to pull assets from your drive
-r_TexturesStreamPoolSize = **2048** ; The dedicated pool for textures usually half of your total VRAM
+sys_budget_videomem = 4096 ; Total amount of VRAM your graphics card has in MB
+sys_streaming_memory_size = 1024 ; How much room the engine has to pull assets from your drive
+r_TexturesStreamPoolSize = 2048 ; The dedicated pool for textures usually half of your total VRAM
 r_ShadersPrecache = 1                ; Handles the heavy lifting for shaders before you start playing
 e_StreamPrediction = 1               ; Pre loads objects before they hit your screen to avoid pop in
 
@@ -83,14 +82,14 @@ _UseHardwareOcclusionQueries = 1     ; Prevents the card from rendering things y
 ;--- Lighting & Shadows ---
 e_Shadows = 1                        ; Basic shadows for depth without the massive performance hit
 e_ShadowsOnAlphaBlend = 0            ; Stops shadows from trying to render on grass or water
-e_ShadowsMaxTexRes = **128** ; Keeps shadow quality at a level that won't tank your FPS
+e_ShadowsMaxTexRes = 128 ; Keeps shadow quality at a level that won't tank your FPS
 e_ShadowsResScale = 0.5              ; Cuts the overhead needed to calculate shadow size
 e_ShadowsCastViewDistRatio = 0.2     ; Pulls the shadow distance in so you aren't wasting power on the horizon
 r_UsePBuffers = 0                    ; Uses modern hardware methods instead of old legacy tech
 
 ;--- Particles & Visual Effects ---
 r_UseParticlesHalfRes = 1            ; Massive help in large scale combat by optimizing spell effects
-r_ParticleVerticeNum = **128** ; Puts a ceiling on particle complexity for smoother fights
+r_ParticleVerticeNum = 128 ; Puts a ceiling on particle complexity for smoother fights
 gpu_ParticleBuffers = 1              ; Moves the particle workload from the CPU to the GPU
 gpu_ParticlePhysics = 0              ; Turns off heavy physics for small effects you won't notice
 e_ParticlesQuality = 0               ; Sets a solid performance baseline for all visual effects
@@ -100,6 +99,12 @@ r_TexMaxAnisotropy = 16              ; Keeps your textures looking sharp at an a
 ;--- Stability & Latency ---
 r_FinishDoubleBuffered = 1           ; Helps with that "floaty" mouse feeling and cuts down stutter
 ````
+
+***Note on Customization: The commands surrounded by stars above are optimized for a standard gaming PC (8-core CPU, 8GB GPU, 16GB RAM). While this is "Plug & Play" for most people, you can change the following values to match your specific hardware for even better results.***
+- sys_job_system_max_worker = *4* ; Set this to your physical core count so the engine uses the whole CPU
+- sys_budget_videomem = *4096* ; Total amount of VRAM your graphics card has in MB
+- sys_streaming_memory_size = *1024* ; How much room the engine has to pull assets from your drive
+- r_TexturesStreamPoolSize = *2048* ; The dedicated pool for textures, usually half of your total VRAM
 
 ## Disclaimer!
 Currently, changing any ingame settings will undo these lines, however they will reapply upon your next launch of the game. I am currently working on an official addon that will apply the commands, and solve this issue in the future.
