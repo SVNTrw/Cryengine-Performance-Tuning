@@ -1,4 +1,4 @@
-# ArcheRage Performance Optimization Guide
+# Cryengine Performance Optimization Guide
 This is a passion project focused on optimizing an outdated verison of Cryengine, specifically for the popular mmorpg ArcheAge!
 
 ## 📖 Why This Exists
