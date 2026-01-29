@@ -3,15 +3,15 @@ This is a passion project focused on optimizing an outdated verison of Cryengine
 
 ## 📖 Why This Exists
 
-ArcheRage and its relationship with **CryEngine** has been a decades-long struggle.
+ArcheAge’s relationship with CryEngine has been a decades long struggle for the community.
 
 Stuttering.  
 Crashing.  
 Unstable FPS.
 
-After spending years dealing with this, I decided to dig into *why* it happens—and more importantly, **how to fix/mitigate it** (Gameplay & Videos will feel/look noticably smoother even in 100+ player instances!)
+After months of testing/instancing, I've identified the commands that signifigantly reduce/remove these issues.
 
-This repository documents my optimization process, along with full credit to any sources used and a link to my discord support channel located at the bottom.
+This repository consolidates my work into a simple CFG edit for end users.
 
 ❗ **This Project is Appproved for use by the ArcheRage Private Server moderation team, likewise, there should be no issue using this on the Live servers or any other Private Server, no installation is required it's a simple cfg edit.**
 ##  What This Optimization Proccess Does
@@ -24,12 +24,10 @@ This repository documents my optimization process, along with full credit to any
 - Does **not** allow players to see ships, players, or objects from farther away than intended by the devs 
   *(No unfair advantage — this is purely performance-focused)*
 
-## 💻 Requirements
-- GPU
-- CPU
+## 💻 Setup Requirements
+- DirectX 11 enabled in-game
+- Basic Text Editor (Notepad or Notepad++)
 - ArcheRage installed on an **SSD** *(strongly recommended)*
-
-![Ingame Screenshot](https://i.imgur.com/U9kVJSo.png)
 
 ⭐Please note that the engine limits max fps to 150, this will not allow you to uncap fps, these are simple & uninvasive Cryengine commands that are just not utilized
 
@@ -51,40 +49,60 @@ This repository documents my optimization process, along with full credit to any
 4. **Make a space under the already existing lines, then Copy & Paste the following lines under that**  
    - Replace or add the lines exactly as provided below. *(Click the cool box to copy the entire list!)*
 
-```ini
-r_UseShaderThread = 1
-r_ShadersPrecache = 1
-r_GeomInstancing = 1
-r_UseParticlesHalfRes = 1
-r_ParticleVerticeNum = 128
-gpu_ParticleBuffers = 1
-gpu_ParticlePhysics = 0
-e_ParticlesQuality = 0
-e_DetailMaterial = 0
-e_Shadows = 1
-e_ShadowsOnAlphaBlend = 0
-e_ShadowsMaxTexRes = 128
-e_ShadowsCastViewDistRatio = 0.2
-e_ShadowsResScale = 0.5
-e_ObjQuality = 1
-e_LodRatio = 6
-_UseHardwareOcclusionQueries = 1
-r_UsePBuffers = 0
-r_TexMaxAnisotropy = 16
+   
+   
+***Note on Customization: The numbers surrounded by stars below are optimized for a standard gaming PC (8-core CPU, 8GB GPU, 16GB RAM). While this is "Plug & Play" for most people, you can change the highlighted numbers to match your specific hardware for even better results.***
 
-r_UseParticlesHalfRes = 1
-r_ParticleVerticeNum = 0 
-gpu_ParticlePhysics = 0 
-e_ParticlesQuality = 0
-q_ShaderPostProcess = 1
-r_UseParticlesHalfRes = 1
-r_ParticleVerticeNum = 0 
-gpu_ParticlePhysics = 0 
-e_ParticlesQuality = 0
+```ini
+;====================================================================
+; CRYENGINE PERFORMANCE OPTIMIZATION
+; Developed by: SVNTrw
+; Targeted for ArcheAge / ArcheRage Performance & Stability
+;====================================================================
+
+;--- System & CPU Optimization ---
+sys_job_system_enable = 1            ; Helps the engine share the workload across your processor
+sys_job_system_max_worker = **4** ; Set this to your physical core count so the engine uses the whole CPU
+r_UseShaderThread = 1                ; Keeps shader loading on its own track to prevent hitching
+r_MultiThreaded = 1                  ; Tells the engine to use all available cores
+
+;--- Memory & Asset Streaming ---
+sys_budget_videomem = **4096** ; Total amount of VRAM your graphics card has in MB
+sys_streaming_memory_size = **1024** ; How much room the engine has to pull assets from your drive
+r_TexturesStreamPoolSize = **2048** ; The dedicated pool for textures usually half of your total VRAM
+r_ShadersPrecache = 1                ; Handles the heavy lifting for shaders before you start playing
+e_StreamPrediction = 1               ; Pre loads objects before they hit your screen to avoid pop in
+
+;--- Geometry & Rendering ---
+e_ObjQuality = 1                     ; Focuses on smooth performance instead of drawing distant objects
+e_LodRatio = 6                       ; Controls how far away models stay in high detail
+e_DetailMaterial = 0                 ; Cleans up surface materials to keep the GPU from overworking
+r_GeomInstancing = 1                 ; Lets the GPU group similar objects together to save effort
+_UseHardwareOcclusionQueries = 1     ; Prevents the card from rendering things you can't even see
+
+;--- Lighting & Shadows ---
+e_Shadows = 1                        ; Basic shadows for depth without the massive performance hit
+e_ShadowsOnAlphaBlend = 0            ; Stops shadows from trying to render on grass or water
+e_ShadowsMaxTexRes = **128** ; Keeps shadow quality at a level that won't tank your FPS
+e_ShadowsResScale = 0.5              ; Cuts the overhead needed to calculate shadow size
+e_ShadowsCastViewDistRatio = 0.2     ; Pulls the shadow distance in so you aren't wasting power on the horizon
+r_UsePBuffers = 0                    ; Uses modern hardware methods instead of old legacy tech
+
+;--- Particles & Visual Effects ---
+r_UseParticlesHalfRes = 1            ; Massive help in large scale combat by optimizing spell effects
+r_ParticleVerticeNum = **128** ; Puts a ceiling on particle complexity for smoother fights
+gpu_ParticleBuffers = 1              ; Moves the particle workload from the CPU to the GPU
+gpu_ParticlePhysics = 0              ; Turns off heavy physics for small effects you won't notice
+e_ParticlesQuality = 0               ; Sets a solid performance baseline for all visual effects
+q_ShaderPostProcess = 1              ; Lightens the load for things like bloom and motion blur
+r_TexMaxAnisotropy = 16              ; Keeps your textures looking sharp at an angle
+
+;--- Stability & Latency ---
+r_FinishDoubleBuffered = 1           ; Helps with that "floaty" mouse feeling and cuts down stutter
 ````
 
 ## Disclaimer!
-Currently, changing any ingame settings will undo these lines, however they will reapply upon your next launch of the game.
+Currently, changing any ingame settings will undo these lines, however they will reapply upon your next launch of the game. I am currently working on an official addon that will apply the commands, and solve this issue in the future.
 
 ## If you followed the steps above, you'll notice a **huge difference** right away:  
 - FPS no longer drops to the 15s  
