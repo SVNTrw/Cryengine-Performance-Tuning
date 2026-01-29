@@ -47,7 +47,7 @@ This repository consolidates my work into a simple CFG edit for end users.
    - Open `system.cfg` with **Notepad** or another text editor.
 
 4. **Make a space under the already existing lines, then Copy & Paste the following lines under that**  
-   - Replace or add the lines exactly as provided below. *(Click the cool box to copy the entire list!)*
+   - Replace or add the lines exactly as provided below. *(Click the interactable box on the top right to copy the entire list!)*
 
 
 
