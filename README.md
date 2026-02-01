@@ -46,100 +46,51 @@ This repository consolidates my work into a simple CFG edit for end users.
 3. **Edit `system.cfg`**  
    - Open `system.cfg` with **Notepad** or another text editor.
 
-4. **Make a space under the already existing lines, then Copy & Paste the following lines under that, I've supplied both mid range and high range options.**  
+4. **Make a space under the already existing lines, then Copy & Paste the following lines under that.**  
    - Replace or add the lines exactly as provided below. *(Click the interactable box on the top right to copy the entire list!)*
 
 
-
-# MID-RANGE OPTION
-```ini
-;====================================================================
-; CRYENGINE PERFORMANCE OPTIMIZATION
-; Developed by: SVNTrw
-; Targeted for ArcheAge / ArcheRage Performance & Stability
-;====================================================================
-
-;--- System & CPU Optimization ---
-sys_job_system_enable = 1            ; Helps the engine share the workload across your processor
-sys_job_system_max_worker = 4 ; Set this to your physical core count so the engine uses the whole CPU
-r_UseShaderThread = 1                ; Keeps shader loading on its own track to prevent hitching
-r_MultiThreaded = 1                  ; Tells the engine to use all available cores
-
-;--- Memory & Asset Streaming ---
-sys_budget_videomem = 4096 ; Total amount of VRAM your graphics card has in MB
-sys_streaming_memory_size = 1024 ; How much room the engine has to pull assets from your drive
-r_TexturesStreamPoolSize = 2048 ; The dedicated pool for textures usually half of your total VRAM
-r_ShadersPrecache = 1                ; Handles the heavy lifting for shaders before you start playing
-e_StreamPrediction = 1               ; Pre loads objects before they hit your screen to avoid pop in
-
-;--- Geometry & Rendering ---
-e_ObjQuality = 1                     ; Focuses on smooth performance instead of drawing distant objects
-e_LodRatio = 6                       ; Controls how far away models stay in high detail
-e_DetailMaterial = 0                 ; Cleans up surface materials to keep the GPU from overworking
-r_GeomInstancing = 1                 ; Lets the GPU group similar objects together to save effort
-_UseHardwareOcclusionQueries = 1     ; Prevents the card from rendering things you can't even see
-
-;--- Lighting & Shadows ---
-e_Shadows = 1                        ; Basic shadows for depth without the massive performance hit
-e_ShadowsOnAlphaBlend = 0            ; Stops shadows from trying to render on grass or water
-e_ShadowsMaxTexRes = 128 ; Keeps shadow quality at a level that won't tank your FPS
-e_ShadowsResScale = 0.5              ; Cuts the overhead needed to calculate shadow size
-e_ShadowsCastViewDistRatio = 0.2     ; Pulls the shadow distance in so you aren't wasting power on the horizon
-r_UsePBuffers = 0                    ; Uses modern hardware methods instead of old legacy tech
-
-;--- Particles & Visual Effects ---
-r_UseParticlesHalfRes = 1            ; Massive help in large scale combat by optimizing spell effects
-r_ParticleVerticeNum = 128 ; Puts a ceiling on particle complexity for smoother fights
-gpu_ParticleBuffers = 1              ; Moves the particle workload from the CPU to the GPU
-gpu_ParticlePhysics = 0              ; Turns off heavy physics for small effects you won't notice
-e_ParticlesQuality = 0               ; Sets a solid performance baseline for all visual effects
-q_ShaderPostProcess = 1              ; Lightens the load for things like bloom and motion blur
-r_TexMaxAnisotropy = 16              ; Keeps your textures looking sharp at an angle
-
-;--- Stability & Latency ---
-r_FinishDoubleBuffered = 1           ; Helps with that "floaty" mouse feeling and cuts down stutter
-````
-# HIGH-RANGE OPTION
 ```ini
 ;--- System & CPU Optimization ---
-sys_job_system_enable = 1            ; Shares the load across your 5800X3D cores to prevent CPU spikes
-sys_job_system_max_worker = 8        ; Matches your physical cores to keep threads from jumping around
-r_UseShaderThread = 1                ; Keeps the heavy shader work from pausing your gameplay
+sys_job_system_enable = 1
+sys_job_system_max_worker = 8
+r_UseShaderThread = 1
 
 ;--- Memory & Asset Streaming ---
-sys_budget_videomem = 12288          ; Tells the game your 3080 has a full 12GB to play with
-sys_streaming_memory_size = 4096     ; Uses your 32GB RAM to hold more map data and stop asset hitches
-r_TexturesStreamPoolSize = 6144      ; Reserves 6GB of VRAM so high-res textures never have to "pop in"
-r_ShadersPrecache = 1                ; Pre-loads the shaders at the start so they don't load during a fight
-e_StreamPrediction = 1               ; Calculates what objects are coming next to keep the flow smooth
+sys_budget_videomem = 12288
+sys_streaming_memory_size = 4096
+r_TexturesStreamPoolSize = 6144
+r_ShadersPrecache = 1
+e_StreamPrediction = 1
 
 ;--- Geometry & Rendering ---
-e_ObjQuality = 2                     ; Higher setting for your 3080 to keep models sharp at a distance
-e_LodRatio = 10                      ; High value for your build to prevent objects from visibly shifting shapes
-e_DetailMaterial = 1                 ; Keeps high-quality surface textures enabled for visual clarity
-r_GeomInstancing = 1                 ; Efficiently renders groups of objects like trees or ships
-_UseHardwareOcclusionQueries = 1     ; Stops your card from wasting power on things you can't see
+e_ObjQuality = 2
+e_LodRatio = 10
+e_DetailMaterial = 1
+r_GeomInstancing = 1
+_UseHardwareOcclusionQueries = 1
 
 ;--- Lighting & Shadows ---
-e_Shadows = 1                        ; Enables shadows for depth but keeps the engine logic light
-e_ShadowsOnAlphaBlend = 0            ; Disables shadows on transparent stuff to save massive FPS
-e_ShadowsMaxTexRes = 512             ; High resolution shadows that look crisp on an RTX 3080
-e_ShadowsResScale = 0.1              ; Optimized scaling to keep shadow rendering fast and stable
-e_ShadowsCastViewDistRatio = 0.5     ; Allows shadows to be seen further out without the usual lag
-r_UsePBuffers = 0                    ; Modern hardware doesn't need these old slow buffers
+e_Shadows = 1
+e_ShadowsOnAlphaBlend = 0
+e_ShadowsMaxTexRes = 512
+e_ShadowsResScale = 0.1
+e_ShadowsCastViewDistRatio = 0.5
+r_UsePBuffers = 0
 
 ;--- Particles & Visual Effects ---
-r_UseParticlesHalfRes = 1            ; The single best way to stop FPS drops during 100+ player raids
-r_ParticleVerticeNum = 512           ; Keeps spell effects looking dense and high-quality for your GPU
-gpu_ParticleBuffers = 1              ; Hands the particle workload to your 3080 instead of your CPU
-gpu_ParticlePhysics = 0              ; Removes physics from tiny debris to keep the frame rate flat
-e_ParticlesQuality = 2               ; High quality particles that are optimized by the half-res setting above
-q_ShaderPostProcess = 2              ; Medium-High post processing for better lighting and bloom
-r_TexMaxAnisotropy = 16              ; Keeps your textures perfectly sharp at every angle
+r_UseParticlesHalfRes = 1
+r_ParticleVerticeNum = 512
+gpu_ParticleBuffers = 1
+gpu_ParticlePhysics = 0
+e_ParticlesQuality = 2
+q_ShaderPostProcess = 2
+r_TexMaxAnisotropy = 16
 
 ;--- Stability & Latency ---
-r_FinishDoubleBuffered = 1           ; Removes the "laggy" mouse feeling and smooths out frame delivery
+r_FinishDoubleBuffered = 1
 ````
+
 
 
 ***Note on Customization: The commands surrounded by stars above are optimized for a standard gaming PC (8-core CPU, 8GB GPU, 16GB RAM). While this is "Plug & Play" for most people, you can change the following values to match your specific hardware for even better results.***
