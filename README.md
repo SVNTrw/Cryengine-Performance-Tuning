@@ -46,12 +46,12 @@ This repository consolidates my work into a simple CFG edit for end users.
 3. **Edit `system.cfg`**  
    - Open `system.cfg` with **Notepad** or another text editor.
 
-4. **Make a space under the already existing lines, then Copy & Paste the following lines under that**  
+4. **Make a space under the already existing lines, then Copy & Paste the following lines under that, I've supplied both mid range and high range options.**  
    - Replace or add the lines exactly as provided below. *(Click the interactable box on the top right to copy the entire list!)*
 
 
 
-
+# MID-RANGE OPTION
 ```ini
 ;====================================================================
 ; CRYENGINE PERFORMANCE OPTIMIZATION
@@ -99,6 +99,48 @@ r_TexMaxAnisotropy = 16              ; Keeps your textures looking sharp at an a
 ;--- Stability & Latency ---
 r_FinishDoubleBuffered = 1           ; Helps with that "floaty" mouse feeling and cuts down stutter
 ````
+# HIGH-RANGE OPTION
+```ini
+;--- System & CPU Optimization ---
+sys_job_system_enable = 1            ; Shares the load across your 5800X3D cores to prevent CPU spikes
+sys_job_system_max_worker = 8        ; Matches your physical cores to keep threads from jumping around
+r_UseShaderThread = 1                ; Keeps the heavy shader work from pausing your gameplay
+
+;--- Memory & Asset Streaming ---
+sys_budget_videomem = 12288          ; Tells the game your 3080 has a full 12GB to play with
+sys_streaming_memory_size = 4096     ; Uses your 32GB RAM to hold more map data and stop asset hitches
+r_TexturesStreamPoolSize = 6144      ; Reserves 6GB of VRAM so high-res textures never have to "pop in"
+r_ShadersPrecache = 1                ; Pre-loads the shaders at the start so they don't load during a fight
+e_StreamPrediction = 1               ; Calculates what objects are coming next to keep the flow smooth
+
+;--- Geometry & Rendering ---
+e_ObjQuality = 2                     ; Higher setting for your 3080 to keep models sharp at a distance
+e_LodRatio = 10                      ; High value for your build to prevent objects from visibly shifting shapes
+e_DetailMaterial = 1                 ; Keeps high-quality surface textures enabled for visual clarity
+r_GeomInstancing = 1                 ; Efficiently renders groups of objects like trees or ships
+_UseHardwareOcclusionQueries = 1     ; Stops your card from wasting power on things you can't see
+
+;--- Lighting & Shadows ---
+e_Shadows = 1                        ; Enables shadows for depth but keeps the engine logic light
+e_ShadowsOnAlphaBlend = 0            ; Disables shadows on transparent stuff to save massive FPS
+e_ShadowsMaxTexRes = 512             ; High resolution shadows that look crisp on an RTX 3080
+e_ShadowsResScale = 0.1              ; Optimized scaling to keep shadow rendering fast and stable
+e_ShadowsCastViewDistRatio = 0.5     ; Allows shadows to be seen further out without the usual lag
+r_UsePBuffers = 0                    ; Modern hardware doesn't need these old slow buffers
+
+;--- Particles & Visual Effects ---
+r_UseParticlesHalfRes = 1            ; The single best way to stop FPS drops during 100+ player raids
+r_ParticleVerticeNum = 512           ; Keeps spell effects looking dense and high-quality for your GPU
+gpu_ParticleBuffers = 1              ; Hands the particle workload to your 3080 instead of your CPU
+gpu_ParticlePhysics = 0              ; Removes physics from tiny debris to keep the frame rate flat
+e_ParticlesQuality = 2               ; High quality particles that are optimized by the half-res setting above
+q_ShaderPostProcess = 2              ; Medium-High post processing for better lighting and bloom
+r_TexMaxAnisotropy = 16              ; Keeps your textures perfectly sharp at every angle
+
+;--- Stability & Latency ---
+r_FinishDoubleBuffered = 1           ; Removes the "laggy" mouse feeling and smooths out frame delivery
+````
+
 
 ***Note on Customization: The commands surrounded by stars above are optimized for a standard gaming PC (8-core CPU, 8GB GPU, 16GB RAM). While this is "Plug & Play" for most people, you can change the following values to match your specific hardware for even better results.***
 - sys_job_system_max_worker = *4* ; Set this to your physical core count so the engine uses the whole CPU
