@@ -83,7 +83,7 @@ q_ShaderPostProcess = 1
 
 
 
-***Note on Customization: The commands surrounded by stars above are optimized for a standard gaming PC (8-core CPU, 8GB GPU, 16GB RAM). While this is "Plug & Play" for most people, you can change the following values to match your specific hardware for even better results.***
+***Note on Customization: While this is "Plug & Play" for most people, you can add/ change the following values to match your specific hardware for even better results.***
 - sys_job_system_max_worker = *4* ; Set this to your physical core count so the engine uses the whole CPU
 - sys_budget_videomem = *4096* ; Total amount of VRAM your graphics card has in MB
 - sys_streaming_memory_size = *1024* ; How much room the engine has to pull assets from your drive
