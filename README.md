@@ -52,43 +52,33 @@ This repository consolidates my work into a simple CFG edit for end users.
 
 ```ini
 ;--- System & CPU Optimization ---
-sys_job_system_enable = 1
-sys_job_system_max_worker = 8
 r_UseShaderThread = 1
-
-;--- Memory & Asset Streaming ---
-sys_budget_videomem = 12288
-sys_streaming_memory_size = 4096
-r_TexturesStreamPoolSize = 6144
 r_ShadersPrecache = 1
-e_StreamPrediction = 1
 
 ;--- Geometry & Rendering ---
-e_ObjQuality = 2
-e_LodRatio = 10
-e_DetailMaterial = 1
+e_ObjQuality = 1
+e_LodRatio = 6
+e_DetailMaterial = 0
 r_GeomInstancing = 1
 _UseHardwareOcclusionQueries = 1
+r_UsePBuffers = 0
+r_TexMaxAnisotropy = 16
 
 ;--- Lighting & Shadows ---
 e_Shadows = 1
 e_ShadowsOnAlphaBlend = 0
-e_ShadowsMaxTexRes = 512
-e_ShadowsResScale = 0.1
-e_ShadowsCastViewDistRatio = 0.5
-r_UsePBuffers = 0
+e_ShadowsMaxTexRes = 128
+e_ShadowsResScale = 0.5
+e_ShadowsCastViewDistRatio = 0.2
 
 ;--- Particles & Visual Effects ---
 r_UseParticlesHalfRes = 1
-r_ParticleVerticeNum = 512
+r_ParticleVerticeNum = 128
 gpu_ParticleBuffers = 1
 gpu_ParticlePhysics = 0
-e_ParticlesQuality = 2
-q_ShaderPostProcess = 2
-r_TexMaxAnisotropy = 16
-
-;--- Stability & Latency ---
-r_FinishDoubleBuffered = 1
+e_ParticlesQuality = 0
+e_Decals = 0
+q_ShaderPostProcess = 1
 ````
 
 
